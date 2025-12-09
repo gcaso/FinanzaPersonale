@@ -2,15 +2,23 @@
 pages:
   stage: deploy
   image: busybox
+  
+  # ISTRUZIONE CHIAVE: Permette al job di girare su repo privati
+  # e rende gli artifact (i file pubblicati) pubblici.
+  # Questi due parametri sono fondamentali per l'hosting privato.
+  allow_failure: false 
+  
   script:
-    # Crea la cartella 'public' (obbligatoria)
     - mkdir .public
-    # Copia tutti i file statici nella cartella 'public'
     - cp -R * .public
-    # Rinomina la cartella .public in public
     - mv .public public
+  
   artifacts:
     paths:
       - public
+    # ISTRUZIONE CHIAVE: Rende i file di Pages pubblici anche se il repo è privato
+    public: true 
+    
   only:
-    - main
+    - main 
+    # Oppure - master, a seconda del nome del tuo branch principale
