@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Le Principali Asset Class: Obbligazioni e Azioni</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.5.2/css/all.css">
+    <style>
+        /* Stili ripresi dalle pagine precedenti */
+        .portfolio-section {
+            padding: 20px 0;
+        }
+
+        /* Stili specifici per le Asset Class */
+        /* Azioni: colore per la crescita, aggressivo */
+        .asset-header-azioni {
+            background-color: #f8d7da !important; /* Rosso tenue (Danger/Crescita) */
+            color: #842029 !important;
+            border-bottom: 3px solid #f5c2c7;
+        }
+        /* Obbligazioni: colore per la stabilità, difensivo */
+        .asset-header-obbligazioni {
+            background-color: #d1e7dd !important; /* Verde tenue (Success/Stabilità) */
+            color: #0f5132 !important;
+            border-bottom: 3px solid #75b798;
+        }
+        
+        .asset-icon {
+            font-size: 1.5rem;
+            margin-right: 0.5rem;
+        }
+        .card-title {
+            font-weight: bold;
+        }
+        .info-label {
+            font-weight: bold;
+            color: #495057; /* Grigio scuro */
+            margin-bottom: 0;
+        }
+        .info-value {
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+        }
+        /* Stile per i punti chiave di diversificazione */
+        .diversification-point {
+            margin-bottom: 10px;
+            padding-left: 0;
+            list-style: none;
+        }
+        .diversification-point .icon {
+            color: #dc3545; /* Colore rosso per Azioni */
+            margin-right: 5px;
+        }
+
+        /* Stile per il box di enfasi */
+        .asset-emphasis-box {
+            background-color: #f0f8ff; /* Azzurro molto chiaro */
+            border-left: 5px solid #0dcaf0; /* Bordo azzurro info */
+            padding: 15px;
+            border-radius: 5px;
+        }
+        .asset-emphasis-box h4 {
+            color: #0dcaf0;
+            font-size: 1.1rem;
+        }
+        /* Stile per l'avviso di rischio alto */
+        .high-risk-warning {
+            color: #dc3545; /* Rosso */
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container mt-4">
+        <h1 class="mb-4"><i class="fa-solid fa-scale-balanced"></i> Le Principali Asset Class</h1>
+        <p class="lead">Le asset class sono le categorie di investimento fondamentali che, opportunamente combinate, formano un portafoglio diversificato. Conoscerle è il primo passo per l'allocazione del capitale. Qui verranno dettagliate le asset class che possono entrare nel portafoglio di un investitore medio con conoscenze base di finanza personale e con una buona propensione al rischio. Con queste asset class stiamo andando a costruire il nostro terzo pilastro con le obbligazioni ed il quarto pilastro con le azioni o una combinazione di azioni ed obbligazioni.</p>
+        
+        <hr class="my-4">
+        
+        <div class="alert alert-info" role="alert">
+            <i class="fa-solid fa-bed"></i> La combinazione bilanciata di Azioni (crescita) e Obbligazioni (protezione) è alla base della maggior parte dei **Portafogli Pigri** e delle strategie passive.
+        </div>
+        
+        <div class="row portfolio-section g-4">
+            
+            <div class="col-lg-6">
+                <div class="card shadow-sm h-100">
+                    <div class="card-header asset-header-obbligazioni">
+                        <i class="fa-solid fa-hand-holding-dollar asset-icon"></i> Obbligazioni (Bonds)
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title mb-3">Definizione e Ruolo</h5>
+                        <p class="card-text small text-dark">L'obbligazione è un titolo di debito emessa da uno Stato o una azienda. E' un prestito che l'investitore concede ad un ente emittente, che si impegna a restituire il capitale alla scadenza e a pagare periodicamente degli interessi (cedole).</p>
+                        
+                        <div class="row mt-4">
+                            <div class="col-12">
+                                <p class="info-label">Funzione nel Portafoglio:</p>
+                                <p class="info-value">Garantire stabilità e fornire un flusso di reddito regolare. Fungono da cuscinetto durante i crolli del mercato azionario. <br>Possono andare a costituire il terzo pilastro della finanza personale.</p>
+                            </div>
+
+                            <div class="col-12">
+                                <p class="info-label">Tipologie:</p>
+                                <p class="info-value"><b>Obbligazioni societarie:</b> emesse da società . Corrispondono interessi più alti rispetto alle obbligazioni governative.</p>
+				<p class="info-value"><b>Obbligazioni governative:</b> emesse da paesi.</p>
+				<p class="info-value text-warning">Nel valutare l'acquisto di obbligazioni occorre prestare attenzione al rating che è una valutazione sull'affidabilità creditizia effettuata da agenzie specializzate. Il rating ha influenza diretta sul tasso di interesse: più l'emittente è affidabile minore sarà il tasso di interesse corrisposto e vice versa. In questo senso le obbligazioni si dividono in <b>Investment Grade (IG)</b> emesse da sicietà e paesi con rating elevato e <b>High Yield</b> emesse da società e paesi meno stabili.
+                            </div>
+
+                            <div class="col-12">
+                                <p class="info-label">RISCHI</p>
+                                <b class="info-value text-warning">Oscillazione dei Tassi di Interesse:</b> presente solo nel caso in cui si debbano vendere i titoli acquistati prima della scadenza. Se dalla data di acquisto dell'obbligazione i tassi di interesse delle banche centrali sono aumentati, il valore della nostra obbligazione scende. Questo perchè chi si trova a comprare una obbligazione in quel momento ha la possibilità di ottenere una cedola più alta comprando obbligazioni di nuova emissione. <br> <b class="info-value text-warning">Rischio emittente:</b> se l'emittente fallisce, il capitale potrebbe non essere rimborsato. Il rischio è più alto per società e paesi con un rating basso, come ad esempio i paesi emergenti. 
+                            </div>
+                            <div class="col-12">
+                                <p class="info-label">Orizzonte Temporale Ideale:</p>
+                                <p class="info-value">In base allo scopo possono essere selezionate obbligazioni a breve termine (1-3 anni) o a lungo termine (7-10 anni).</p>
+                            </div>
+			    <div class="col-12">
+                                <p class="info-label">TASSAZIONE</p>
+                                <p class="info-value">
+					Le plusvalenze sulle obbligazioni societarie e dei paesi non inclusi nella "white list"* sono tassate al <b>26%</b>. 
+					<br>Per i titoli di stato Italiani e quelli emessi da paesi che fanno parte della "white list"* la tassazione sulle plusvalenze è pari al <b>12,5%</b>. 
+					<br>Le somme investite in titoli di stato Italiani sono esclusi dal calcolo dell'ISEE fino a 50.000 euro e sono esenti da imposte di successione.
+					<br><br>*White list: è un elenco di paesi considerati “collaborativi” dal punto di vista fiscale, in quanto garantiscono un adeguato scambio di informazioni con l’Italia. Viene aggiornata periodicamente e vi fanno parte, a titolo di esempio, i paesi facenti parte della comunità europea.
+				</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-6">
+                <div class="card shadow-sm h-100">
+                    <div class="card-header asset-header-azioni">
+                        <i class="fa-solid fa-chart-line asset-icon"></i> Azioni (Equity)
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title mb-3">Definizione e Ruolo</h5>
+                        <p class="card-text small text-dark">L'azione rappresenta una quota di proprietà (capitale di rischio) di una società per azioni. Acquistando un'azione, si diventa socio e si ha diritto a una parte dei profitti (dividendi) oltre al diritto di voto in assemblea con un peso proporzionato alle quote possedute.</p>
+                        
+                        <div class="row mt-4 pt-2">
+                            <div class="col-12">
+                                <p class="info-label">Funzione nel Portafoglio:</p>
+                                <p class="info-value">Generare crescita del capitale nel lungo termine e superare l'inflazione grazie al beneficio dell'<b>interesse composto</b>.</p>
+                        	<h5 class="card-title mt-4 mb-3">Concetti chiave</h5>
+                        	<ul class="small">
+                            	<li class="diversification-point">
+                                	<span class="icon"><i class="fa-solid fa-sitemap"></i></span> <b>Indici Azionari:</b> un indice (come S&P 500, MSCI World) è un "paniere" virtuale che aggrega centinaia o migliaia di azioni.
+                            	</li>
+                            	<li class="diversification-point">
+                                	<span class="icon"><i class="fa-solid fa-box-open"></i></span> <b>ETF Azionari (Exchange Traded Funds):</b> strumenti che replicano l'andamento di un indice. Sono dei fondi che acquistano azioni delle aziende facenti parte di un indice utilizzato come banchmark. Acquistabili su borse telematiche, hanno costi di gestione molto bassi (generalmente al di sotto dello 0,3%). Permettono di investire in un grande numero di aziende (si acquistano piccole porzioni di un fondo).
+                            	</li>
+                        	</ul>
+                            </div>
+
+                            <div class="col-12">
+                                <p class="info-label">RISCHI</p>
+                                <p class="info-value text-danger">Rischio di mercato (volatilità). Il valore dei titoli può subire variazioni improvvise in breve tempo, sia in positivo che in negativo portando a potenziali perdite in caso di vendita. <br> Se si comprano azioni di singole società, in caso di fallimento si potrebbe avere una perdita totale del capitale investito. <br>Nel caso di ETF, il rischio di perdita dell'intero capitale è praticamente nullo se l'indice azionario utilizzato come benchnark è globale e con un elevato numero di partecipazioni (aziende che rientrano nel paniere).</p>
+                            </div>
+                            <div class="col-12">
+                                <p class="info-label">Orizzonte Temporale Ideale:</p>
+                                <p class="info-value">Se guardiamo al passato, con orizzonte temporale maggiore di 10 anni le possibilità di uscire dall'investimento in perdita sono molto basse, oltre i 20 anni non è mai successo. Occorre quindi essere sicuri di avere a disposizione un orizzonte temporale di almeno 10 anni.</p>
+                            </div>
+			    <div class="col-12">
+                                <p class="info-label">TASSAZIONE</p>
+                                <p class="info-value">Le plusvalenze di azioni ed ETF sono tassate al 26%. </p>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        
+        <hr class="my-4">
+
+<div class="asset-emphasis-box mb-4">
+Le plusvalenze sono il guadagno ottenuto dalla vendita di titoli ad un prezzo superiore a quello di acquisto. Sono calcolate come differenza tra prezzo di vendita e prezzo di acquisto.
+</div>
+
+<div class="asset-emphasis-box mb-4">
+Oltre alla tassazione indicata nelle apposite sezioni, occorre calcolare anche una imposta di bollo sul conto titoli: la trattenuta prevista è dello 0,20% (2 per mille) su base annua sul controvalore totale dei prodotti finanziari in possesso alla fine del periodo di rendicontazione (o chiusura del rapporto).
+</div>
+        
+        <div class="asset-emphasis-box mb-4">
+            <h4><i class="fa-solid fa-cubes"></i> Altre Asset Class</h4>
+            <ul class="list-group list-group-flush small bg-transparent">
+                <li class="list-group-item bg-transparent border-0 py-1">
+                    <span class="fw-bold text-dark">Materie Prime (Petrolio, gas, metalli industriali, prodotti agricoli, ecc..) e Oro:</span> Beni fisici (Oro, Argento, Petrolio) sono asset che permettono di diversificare il portafoglio, agendo da bene rifugio contro l'inflazione e l'incertezza.
+                </li>
+                <li class="list-group-item bg-transparent border-0 py-1">
+                    <span class="fw-bold text-dark">Immobili (Real Estate):</span> Investimenti in proprietà fisiche o tramite fondi immobiliari quotati (REITs). Forniscono diversificazione e potenziale reddito da affitto.
+                </li>
+                <li class="list-group-item bg-transparent border-0 py-1">
+                    <span class="fw-bold text-dark">Liquidità:</span> Contanti e strumenti equivalenti (es. Conti Deposito). Fondamentali per il Fondo di Emergenza, ma non adatti all'investimento a lungo termine (rischio inflazione).
+                </li>
+            </ul>
+        </div>
+        <hr class="my-4">
+
+    </div>
+    
+    <footer class="container py-4">
+        <div class="mt-5 pt-3 border-top text-muted small">
+            **Disclaimer Finanziario e Legale:** Le informazioni presenti in questa pagina hanno scopo puramente **informativo e didattico**. Questa risorsa **non costituisce in alcun modo consulenza finanziaria personalizzata**, raccomandazione di investimento o offerta di prodotti finanziari. Ogni decisione di investimento è responsabilità esclusiva dell'utente. I rendimenti passati non sono garanzia di rendimenti futuri.
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
