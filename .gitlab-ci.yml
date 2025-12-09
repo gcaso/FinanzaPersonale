@@ -1,0 +1,16 @@
+# .gitlab-ci.yml
+pages:
+  stage: deploy
+  image: busybox
+  script:
+    # Crea la cartella 'public' (obbligatoria)
+    - mkdir .public
+    # Copia tutti i file statici nella cartella 'public'
+    - cp -R * .public
+    # Rinomina la cartella .public in public
+    - mv .public public
+  artifacts:
+    paths:
+      - public
+  only:
+    - main
