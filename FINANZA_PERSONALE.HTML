@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Le Basi della Finanza Personale: I 4 Pilastri</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.5.2/css/all.css">
+    <style>
+        /* Stili Generali e Sezioni */
+        body {
+            background-color: #f7f9fc; 
+        }
+        .header-main {
+            background-color: #e3f2fd; 
+            color: #212529;
+            font-weight: bold;
+        }
+        .portfolio-section {
+            padding: 30px 0;
+            background-color: #fff; 
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05); 
+        }
+        h1 {
+            color: #0d6efd; 
+            border-bottom: 3px solid #0d6efd;
+            padding-bottom: 10px;
+        }
+        .lead {
+            font-size: 1.1rem;
+            color: #495057;
+        }
+
+        /* Stili per le Card dei 4 Pilastri (colori tenui) */
+        .card {
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: none;
+            border-radius: 10px;
+            overflow: hidden; 
+        }
+        .card:hover {
+            transform: translateY(-5px); 
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        /* Colori e Icone per i Pilastri */
+        .pillar-header-1 { background-color: #e9ecef !important; color: #343a40 !important; border-bottom: 3px solid #adb5bd; font-weight: bold; }
+        .pillar-header-2 { background-color: #d4edda !important; color: #155724 !important; border-bottom: 3px solid #75b798; font-weight: bold; }
+        .pillar-header-3 { background-color: #fff3cd !important; color: #856404 !important; border-bottom: 3px solid #ffda6a; font-weight: bold; }
+        .pillar-header-4 { background-color: #f8d7da !important; color: #721c24 !important; border-bottom: 3px solid #f5c2c7; font-weight: bold; }
+
+        .pillar-icon {
+            font-size: 1.8rem; 
+            margin-right: 0.5rem;
+        }
+        .card-body h5 {
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+        }
+        /* Stile per i Titoli di Sottosezione (evidenziazione) */
+        .card-text strong.section-title {
+            display: block; 
+            font-size: 0.95rem; 
+            color: #0d6efd; 
+            border-bottom: 1px dotted #e9ecef; 
+            margin-bottom: 5px;
+            padding-bottom: 2px;
+            font-weight: 700 !important; 
+        }
+        .card-text.small {
+            margin-bottom: 1rem; 
+        }
+
+        /* STILE PIRAMIDE ROVESCIATA CORRETTA */
+        .pyramid-container {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start; 
+            margin-top: 30px;
+            margin-bottom: 50px;
+            height: 250px; 
+        }
+        .pyramid-level {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            font-weight: bold;
+            color: #212529 !important; 
+            padding: 15px 0; 
+            margin-bottom: 5px; 
+            border-radius: 5px; 
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1); 
+            transition: all 0.3s;
+        }
+        
+        /* Misure e Colori per Piramide Rovesciata (Ordine 1 in alto, 4 in basso) */
+        .level-1-pyr { width: 30%; background-color: #e9ecef; z-index: 4; border: 1px solid #adb5bd;} 
+        .level-2-pyr { width: 50%; background-color: #d4edda; z-index: 3; border: 1px solid #75b798;}
+        .level-3-pyr { width: 70%; background-color: #fff3cd; z-index: 2; border: 1px solid #ffda6a;}
+        .level-4-pyr { width: 90%; background-color: #f8d7da; z-index: 1; border: 1px solid #f5c2c7;}
+        
+        .pyramid-level::before {
+            content: none;
+        }
+
+
+        /* STILI PER ANIMAZIONE SCROLL */
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .scroll-reveal.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Applica ritardo progressivo alle card per un effetto a cascata */
+        .portfolio-section .col-12:nth-child(1) .scroll-reveal { transition-delay: 0.1s; }
+        .portfolio-section .col-12:nth-child(2) .scroll-reveal { transition-delay: 0.3s; }
+        .portfolio-section .col-12:nth-child(3) .scroll-reveal { transition-delay: 0.5s; }
+        .portfolio-section .col-12:nth-child(4) .scroll-reveal { transition-delay: 0.7s; }
+        
+        /* Applica ritardo progressivo agli alert */
+        .row.g-3.mb-5 .col-md-4:nth-child(1) .scroll-reveal { transition-delay: 0.1s; }
+        .row.g-3.mb-5 .col-md-4:nth-child(2) .scroll-reveal { transition-delay: 0.2s; }
+        .row.g-3.mb-5 .col-md-4:nth-child(3) .scroll-reveal { transition-delay: 0.3s; }
+
+    </style>
+</head>
+<body>
+
+    <div id="navbar-placeholder"></div>
+
+    <div class="container mt-4">
+        <h1 class="mb-4 text-center">
+	        <i class="fa-solid fa-building-columns"></i> Le Basi della Finanza Personale: I 4 Pilastri
+        </h1>
+        <p class="lead text-center">La finanza personale non è solo investire. È costruire una base solida e organizzata per gestire il denaro in ogni fase della vita. Il concetto è che ogni euro ha uno scopo. In questa pagina viene descritto un modello a pilastri che può essere visto come una piramide fatta di contenitori. Ogni contenitore è un pilastro. Il primo è il più piccolo mentre alla base si trova il più grande. In questo modello i soldi sono come dell'acqua che viene versata sulla cima della piramide. Solo una volta che il contenitore al livello più alto si riempe, l'acqua comincia a cadere in quello sottostante che a sua volta andrà a riempirsi continuando così fino all'ultimo livello più in basso. In base a questa similitudine, nel momento in cui è necessario prelevare dell'acqua da uno dei contenitori, questo si svuoterà e l'acqua dovrà nuovamente riempirlo prima di poter scorrere nuovamente in quello sottostante.</p>
+        
+        <hr class="my-4">
+        
+        <div class="pyramid-container d-none d-md-flex flex-column align-items-center scroll-reveal">
+            <div class="pyramid-level level-1-pyr text-uppercase">1. Spese Correnti (Quotidiano)</div>
+            <div class="pyramid-level level-2-pyr text-uppercase">2. Fondo di Emergenza (Riserva Anti-Shock)</div>
+            <div class="pyramid-level level-3-pyr text-uppercase">3. Spese Previste (Medio Termine)</div>
+            <div class="pyramid-level level-4-pyr text-uppercase">4. Investimenti (Lungo Termine)</div>
+        </div>
+        
+
+        <div class="row g-3 mb-5">
+            <div class="col-md-4">
+                <div class="alert alert-primary shadow-sm h-100 scroll-reveal" role="alert">
+                    <i class="fa-solid fa-layer-group"></i> La gerarchia è fondamentale: ogni pilastro deve essere costruito solo dopo aver completato o stabilizzato quello precedente. 
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="alert alert-primary shadow-sm h-100 scroll-reveal" role="alert">
+                    <i class="fa-solid fa-scale-unbalanced-flip"></i> Le dimensioni dei vari pilastri non è fissa ma cambia al mutare della propria situazione, delle esigenze e priorità.
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="alert alert-primary shadow-sm h-100 scroll-reveal" role="alert">
+                    <i class="fa-solid fa-ban"></i> Ognuno ha una propria propensione al rischio. Non è necessario andare oltre il secondo pilastro se non ci si sente confidenti o pronti per farlo. Questo sito ha come scopo quello di dare delle nozioni di base che possano far scaturire curiosità ed interesse su un argomento che può avere un enorme impatto sulla propria vita.
+                </div>
+            </div>
+        </div>
+  
+        <div class="row portfolio-section g-4">
+            
+            <div class="col-12">
+                <div class="card shadow-lg h-100 scroll-reveal">
+                    <div class="card-header pillar-header-1 py-3">
+                        <i class="fa-solid fa-wallet pillar-icon"></i> 1. Spese Correnti
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title text-uppercase small text-secondary">Il Quotidiano</h5>
+                        <p class="card-text small text-dark"><strong class="section-title">Scopo:</strong> riguarda la gestione delle entrate e delle uscite. Vengono gestite le spese ricorrenti come affitto, bollette, spesa alimentare, trasporti, ecc.</p>
+                        <p class="card-text small text-dark"><strong class="section-title">Allocazione:</strong> qui occorre allocare circa tre mesi di spese correnti.</p>
+                        <p class="card-text small"><strong class="section-title">Obiettivo:</strong> ottimizzazione e monitoraggio di entrate ed uscite (Budgeting). Imparare a stabilire regole di allocazione delle risorse tra spese fisse, spese accessorie e risparmi (es. regola del 50-30-20). Questo denaro deve essere immediatamente accessibile e non deve essere soggetto a rischio.</p>
+                        <p class="card-text small border-top pt-2"><strong class="section-title text-success">Strumento ideale:</strong> conto corrente. La regola è che NON DEVONO ESSERE PRESENTI COSTI DI GESTIONE. La maggior parte dei conti correnti sono a costo 0, alcuni danno interessi sulla giacenza e/o cashback. Se si sceglie questo strumento sarebbe preferibile rimanere sotto la soglia di 5.000 euro di giacenza media per evitare l'imposta di bollo di 34,30 euro</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12">
+                <div class="card shadow-lg h-100 scroll-reveal">
+                    <div class="card-header pillar-header-2 py-3">
+                        <i class="fa-solid fa-umbrella pillar-icon"></i> 2. Fondo di Emergenza
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title text-uppercase small text-secondary">La Riserva Anti-Shock</h5>
+                        <p class="card-text small text-dark"><strong class="section-title">Scopo:</strong> una riserva di liquidità necessaria a gestire eventi imprevisti come perdita del lavoro, spese mediche urgenti o grandi riparazioni.</p>
+                        <p class="card-text small text-dark"><strong class="section-title">Allocazione:</strong> estremamente soggettiva va rapportata alla propria situazione. Uno studente a carico dei genitori ed un adulto con figli a carico e genitori in vecchiaia con necessità di assistenza avranno allocazioni differenti. Può andare da una mensilità a più di un anno della propria retribuzione. Alcune persone con una bassissima propensione al rischio potrebbero decidere di fermarsi a questo pilastro e non allocare budget sui successivi. <b>Ognuno ha una soglia di propensione al rischio che deve sempre guidare le proprie scelte finanziarie. Non è obbligatorio investire in obbligazioni o azioni se non ci si sente confidenti o pronti a farlo.</b><br>In questo caso, se questo pilastro dovesse raggiungere cifre considerevoli, potrebbe valere la pena rivolgersi ad un consulente finanziario indipendente (che non è il dipendente della banca, sono due cose ben diverse) che potrebbe aiutarci ad allocare al meglio i nostri risparmi compatibilmente con il nostro profilo di rischio.</p>
+                        <p class="card-text small"><strong class="section-title">Obiettivo:</strong> Costruire un tesoretto che permetta di vivere serenamente con la consapevolezza di poter fare fronte a qualsiasi imprevisto.</p>
+                        <p class="card-text small border-top pt-2"><strong class="section-title text-success">Strumento ideale:</strong> conto corrente remunerato o conto deposito svincolabile. E' importante che non si tratti dello stesso conto destinato al primo pilastro. Anche qui la priorità è che non ci siano costi di gestione. Scegliere una banca che aderisca al Fondo Interbancario di Tutela dei Depositi (FITD). Questo garantisce una tutela fino a 100.000 euro (che raddoppia in caso di conto cointestato) in caso di crisi della banca.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12">
+                <div class="card shadow-lg h-100 scroll-reveal">
+                    <div class="card-header pillar-header-3 py-3">
+                        <i class="fa-solid fa-calendar-days pillar-icon"></i> 3. Spese Previste
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title text-uppercase small text-secondary">Fondo strategico per spese prevedibili</h5>
+                        <p class="card-text small text-dark"><strong class="section-title">Scopo:</strong> capitale destinato a obiettivi a medio termine che hanno una data certa o molto probabile (es. acquisto auto, caparra per casa, matrimonio, ecc.).</p>
+                        <p class="card-text small"><strong class="section-title">Allocazione:</strong> corrisponde al budget necessario a coprire la o le spese previste o che possono essere facilmente prevedibili.</p>
+                        <p class="card-text small"><strong class="section-title">Orizzonte temporale:</strong> da 1 a 5 anni. </p>
+                        <p class="card-text small border-top pt-2"><strong class="section-title text-success">Strumento ideale:</strong> Obbligazioni. ETF/Fondi Obbligazionari che investono su obbligazioni governative con profili di rischio bassi e scadenza allineata all'obiettivo. <br><br><b>ATTENZIONE</b> A partire da questo pilastro, occorre fare le seguenti precisazioni: 1. vanno compresi i concetti di rischio collegato alle specifiche asset class 2. occorre acquisire un minimo di competenze sia sulle asset class sia sugli strumenti necessari alla loro compravendita (utilizzo di un conto titoli).</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12">
+                <div class="card shadow-lg h-100 scroll-reveal">
+                    <div class="card-header pillar-header-4 py-3">
+                        <i class="fa-solid fa-rocket pillar-icon"></i> 4. Investimenti
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title text-uppercase small text-secondary">Il risparmio è la benzina, le azioni sono il motore.</h5>
+                        <p class="card-text small text-dark"><strong class="section-title">Scopo:</strong> ATTENZIONE: qui non stiamo parlando di speculazione. Non sitamo parlando i criptovalute, certificati o leva finanziaria. Stiamo parlando di entrare nel mercato e partecipare alla sua crescita. L'obiettivo è quindi quello di far crescere il capitale in maniera consapevole.</p>
+                        <p class="card-text small"><strong class="section-title">Allocazione:</strong> Una volta che i pilastri 1, 2 e 3 sono coperti, si può valutare di accettare un rischio maggiore per massimizzare la crescita, combattendo l'inflazione e sfruttando l'interesse composto.</p>
+                        <p class="card-text small"><strong class="section-title">Orizzonte temporale:</strong> Capitale destinato al lungo termine. Non investire denaro se pensi di poterne avere bisogno prima di 10 anni. Storicamente (i risultati passati non sono garanzia di risultati futuri) oltre 10 anni le possibilità di uscire dall'investimento in perdita sono molto basse, oltre i 20 anni non è mai successo. </p>
+                        <p class="card-text small border-top pt-2"><strong class="section-title text-success">Strumento ideale:</strong>  ETF/Fondi Azionari che seguono indici di borsa.</p>
+			            <br>
+			            <b>ATTENZIONE:</b> prima di cominciare qualsiasi tipo di investimento occorre avere conoscenze sui concetti di azioni, indici azionari, ETF, conto titoli. E' indispensabile definire una strategia. Se non si ha esperienza può essere utile redigere un investment policy statement.
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        
+        <hr class="my-5">
+
+	    <div class="row">
+            <div class="col-lg-6 mb-4">
+                <div class="card h-100 bg-light border-info border-3 shadow-sm scroll-reveal">
+                    <div class="card-body">
+                        <div class="alert alert-info" role="alert">
+                            <i class="fa-solid fa-calculator"></i> <b>BUDGETING.</b> Con questo termine intendiamo il tracciamento, tramite applicazioni o fogli excell o altro, di entrate ed uscite allo scopo di individuare problematiche o ottimizzare le spese.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6 mb-4">
+                <div class="card h-100 bg-light border-warning border-3 shadow-sm scroll-reveal">
+                    <div class="card-body">
+                        <div class="alert alert-warning" role="alert">
+                            <i class="fa-solid fa-circle-exclamation"></i> <b>PROPENSIONE AL RISCHIO.</b> Abbiamo introdotto qui il concetto di propensione al rischio ma cerchiamo di capire a cosa ci riferiamo. La propensione al rischio è la propria capacità di rimanere investiti e seguire la strategia di investimento definita in presenza di forti drawdown, cioè di violente e repentine variazioni al ribasso del valore del proprio portafoglio. Questo è generalmente accompagnato da una aggressiva lente mediatica che generalmente pone enfasi sulla situazione dei mercati con titoli sensazionalistici su crisi senza precedenti e visioni pessimistiche del futuro. Tutto questo potrebbe mettere pressione e spingere a vendere le proprie posizioni in perdita, cosa che rappresenta l'unico modo per perdere soldi nel mercato azionario.<br>Qui vale la pena fare un esempio. Siamo entrati nel mercato azionario investendo in un etf globale 10.000 euro (ricordiamo che in base al nostro modello, prima di arrivare ad investire abbiamo raggiunto un buon controllo delle nostre entrate ed uscite, abbiamo costruito con i nostri risparmi un fondo di emergenza adeguato alla nostra situazione ed un fondo per le spese previste). Diciamo che nei primi due anni le cose vanno bene e riusciamo ad ottenere un 10% di interessi medio all'anno. Un giorno però leggiamo sul giornale di una forte crisi la cui causa non stiamo qui a prevedere. Andiamo a controllare il nostro conto titoli e vediamo che c'è stato un crollo sul valore del nostro etf del 30%. Quindi siamo passati da circa 12.000 euro a diciamo 8.500 euro. Nei giorni a seguire le notizie si susseguono, si parla di migliaia di miliardi "bruciati" e di azioni che continuano a perdere valore. In pochi giorni il nostro capitale arriva sulla soglia dei 6.000 euro. Le notizie sono sempre più allarmanti e sembra che tutti stiano vendendo le proprie posizioni per cercare di salvare quello che rimane del proprio capitale. In questa situazione tu cosa faresti? Se quello che hai appena letto ti ha messo ansia e pensi che uno scenario di questo tipo potrebbe toglierti il sonno, è possibile che investire in azioni non faccia per te o che comunque tu non debba farlo senza la guida di un consulente indipendente (che non è il consulente della banca).
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    
+    <div id="footer-placeholder"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="import.js?v1.0"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Seleziona tutti gli elementi con la classe 'scroll-reveal'
+            const elements = document.querySelectorAll('.scroll-reveal');
+
+            // Opzioni per l'Intersection Observer
+            const observerOptions = {
+                root: null, // Si riferisce al viewport
+                rootMargin: '0px',
+                threshold: 0.1 // 10% dell'elemento deve essere visibile per attivare l'animazione
+            };
+
+            // Funzione di callback che viene eseguita quando gli elementi intersecano il viewport
+            const observerCallback = (entries, observer) => {
+                entries.forEach(entry => {
+                    // Se l'elemento è visibile (sta intersecando il viewport)
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        // Smetti di osservare l'elemento una volta che è apparso
+                        observer.unobserve(entry.target);
+                    }
+                });
+            };
+
+            // Crea l'istanza dell'Observer
+            const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+            // Osserva tutti gli elementi selezionati
+            elements.forEach(element => {
+                observer.observe(element);
+            });
+        });
+    </script>
+</body>
+</html>
