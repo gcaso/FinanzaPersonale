@@ -1,5 +1,7 @@
 function loadHTML(url, elementId) {
-    fetch(url) // Richiede il contenuto del file
+    const cacheBuster = new Date().getTime();
+    const urlWithBuster = `${url}?v=${cacheBuster}`;
+    fetch(urlWithBuster) // Richiede il contenuto del file
         .then(response => response.text())
         .then(data => {
             document.getElementById(elementId).innerHTML = data;
