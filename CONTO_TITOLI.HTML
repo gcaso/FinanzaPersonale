@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guida Operativa Avanzata - Investimenti</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.5.2/css/all.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { background-color: #f0f2f5; font-family: 'Inter', sans-serif; color: #334155; line-height: 1.6; }
+        .main-header { background: #fff; padding: 50px 0; border-bottom: 1px solid #e2e8f0; margin-bottom: 40px; }
+        .info-card { background: #ffffff; border: none; border-radius: 20px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); margin-bottom: 40px; padding: 40px; }
+        .accent-blue { border-left: 8px solid #3b82f6; }
+        .accent-purple { border-left: 8px solid #8b5cf6; }
+        .step-badge { width: 30px; height: 30px; background: #3b82f6; color: white; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-weight: bold; font-size: 0.9rem; margin-right: 12px; flex-shrink: 0; }
+        
+        /* FIX RESPONSIVE PER IL BOOK */
+        .book-container { background: #0f172a; color: #f8fafc; border-radius: 16px; padding: 25px; font-family: 'JetBrains Mono', 'Courier New', monospace; box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06); }
+        .table-responsive-custom { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+        .table-book { width: 100%; border-collapse: collapse; margin-top: 15px; min-width: 450px; } 
+        .table-book th { border-bottom: 1px solid #334155; padding: 12px; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: #94a3b8; white-space: nowrap; }
+        .table-book td { padding: 12px; text-align: center; border-bottom: 1px solid #1e293b; font-size: 0.95rem; white-space: nowrap; }
+        
+        .bid { color: #22c55e; font-weight: bold; } 
+        .ask { color: #ef4444; font-weight: bold; }
+        .highlight-box { background-color: #f8fafc; border-radius: 12px; padding: 20px; border: 1px solid #e2e8f0; }
+        @media (max-width: 768px) { .info-card { padding: 25px; } }
+    </style>
+</head>
+<body>
+
+<div id="navbar-placeholder"></div>
+
+<header class="main-header text-center">
+    <div class="container">
+        <h1 class="fw-bold text-dark"><i class="fa-solid fa-landmark-dome text-primary me-3"></i>Architettura di un Investimento</h1>
+        <p class="lead text-muted mx-auto" style="max-width: 800px;">
+            Dalla selezione della piattaforma alla comprensione profonda della microstruttura del mercato.
+        </p>
+    </div>
+</header>
+
+<div class="container mb-5">
+
+    <div class="info-card accent-blue">
+        <h3 class="fw-bold mb-4">1. La Porta d'Accesso: Il Conto Titoli</h3>
+        <div class="row g-5">
+            <div class="col-lg-7">
+                <p>Per dare vita al tuo <strong>Portafogli</strong>, devi stabilire una connessione con i mercati finanziari. Questo avviene tramite un <strong>broker</strong> o un istituto bancario.</p>
+                
+                <h5 class="fw-bold mt-4 mb-3">Criteri di Scelta del Broker:</h5>
+                <ul class="list-unstyled">
+                    <li class="d-flex mb-3">
+                        <span class="step-badge">1</span>
+                        <div><strong>Struttura Commissionale:</strong> Verifica se paghi una commissione fissa (es. 5€ a eseguito) o variabile (es. 0.19% del controvalore). Per i portafogli pigri, la commissione fissa è spesso preferibile per importi elevati.</div>
+                    </li>
+                    <li class="d-flex mb-3">
+                        <span class="step-badge">2</span>
+                        <div><strong>Accesso ai Mercati:</strong> Assicurati che il broker permetta l'acquisto di ETF su piazze come Borsa Italiana (Milano) o XETRA (Francoforte).</div>
+                    </li>
+                    <li class="d-flex mb-3">
+                        <span class="step-badge">3</span>
+                        <div><strong>Regime Fiscale:</strong> In Italia, il <em>Regime Amministrato</em> solleva l'investitore da ogni obbligo dichiarativo, gestendo automaticamente le tasse sui dividendi e sulle plusvalenze.</div>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-lg-5">
+                <div class="highlight-box">
+                    <h6 class="fw-bold mb-3"><i class="fa-solid fa-shield-halved text-primary me-2"></i>Sicurezza e Protezione</h6>
+                    <p class="small text-muted mb-0">
+                        I titoli che acquisti sono di tua proprietà e depositati presso una banca depositaria. In caso di fallimento del broker, i tuoi titoli sono segregati dal patrimonio della banca e restano tuoi. Esiste inoltre il Fondo Nazionale di Garanzia che copre la liquidità non investita fino a determinate soglie (solitamente 20.000€ o 100.000€ a seconda della giurisdizione).
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="info-card accent-purple">
+        <h3 class="fw-bold mb-4">2. Il Cuore dello Scambio: L'Order Book</h3>
+        <p class="mb-4">Il prezzo che vedi su un'app finanziaria è solo l'ultimo prezzo a cui è avvenuto uno scambio. La realtà del mercato è rappresentata dal <strong>Book</strong>, una lista dinamica di intenzioni di acquisto e vendita.</p>
+        
+        
+
+        <div class="row mt-5">
+            <div class="col-xl-6 mb-4 mb-xl-0">
+                <div class="book-container">
+                    <div class="text-center mb-3 fw-bold text-uppercase text-info">Book di Negoziazione (Esempio ETF)</div>
+                    <div class="table-responsive-custom">
+                        <table class="table-book">
+                            <thead>
+                                <tr>
+                                    <th class="bid">Q.tà Proposta (Bid)</th>
+                                    <th class="bid">Prezzo Acquisto</th>
+                                    <th class="ask">Prezzo Vendita</th>
+                                    <th class="ask">Q.tà Proposta (Ask)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>850</td><td class="bid">98.45</td><td class="ask">98.52</td><td>1.200</td></tr>
+                                <tr><td>2.100</td><td class="bid">98.40</td><td class="ask">98.55</td><td>500</td></tr>
+                                <tr><td>1.500</td><td class="bid">98.35</td><td class="ask">98.60</td><td>2.300</td></tr>
+                                <tr><td>4.000</td><td class="bid">98.30</td><td class="ask">98.65</td><td>1.850</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="mt-4 p-3 rounded bg-dark border border-secondary">
+                        <div class="d-flex justify-content-between small px-2">
+                            <span>Spread Corrente:</span>
+                            <span class="text-warning fw-bold">0.07 (0.07%)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-xl-6">
+                <h5 class="fw-bold">Anatomia del Book:</h5>
+                <ul class="mt-3">
+                    <li class="mb-3"><strong>Denaro (BID):</strong> Rappresenta la "coda" dei compratori. Chi sta in cima al Bid è colui che è disposto a pagare più di tutti gli altri. Se vuoi vendere subito, devi accettare il prezzo Bid.</li>
+                    <li class="mb-3"><strong>Lettera (ASK):</strong> Rappresenta la "coda" dei venditori. Chi sta in cima all'Ask è colui che è disposto a vendere al prezzo più basso. Se vuoi comprare subito, devi pagare il prezzo Ask.</li>
+                    <li class="mb-3"><strong>Spread:</strong> È la differenza tra il miglior Bid e il miglior Ask. Un basso spread indica un titolo molto liquido (facile da comprare/vendere senza "regalare" soldi al mercato).</li>
+                    <li class="mb-3"><strong>Profondità:</strong> Noterai che ci sono vari livelli. Se vuoi comprare 10.000 quote ma il primo livello Ask ne offre solo 1.200, dovrai "scalare" il book pagando prezzi via via più alti.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="info-card">
+        <h3 class="fw-bold mb-4">3. L'Esecuzione: Tradurre la Strategia in Azione</h3>
+        <p>Quando inserisci un ordine, devi decidere <em>come</em> vuoi che venga eseguito. Questa scelta influisce drasticamente sul prezzo finale di carico del tuo portafoglio.</p>
+        
+        <div class="row g-4 mt-2">
+            <div class="col-md-4">
+                <div class="h-100 p-4 border rounded-4 bg-light">
+                    <h6 class="fw-bold text-danger text-uppercase">Ordine a Mercato</h6>
+                    <p class="small">Non specifichi un prezzo. L'ordine "spazza" il book partendo dal miglior prezzo disponibile fino a esaurimento della quantità richiesta.</p>
+                    <hr>
+                    <p class="small"><strong>Pro:</strong> Esecuzione immediata garantita.<br><strong>Contro:</strong> Rischio di pagare molto di più se il titolo è poco liquido.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="h-100 p-4 border rounded-4 bg-light">
+                    <h6 class="fw-bold text-primary text-uppercase">Ordine Limite</h6>
+                    <p class="small">Imposti un prezzo massimo per l'acquisto (o minimo per la vendita). L'ordine entra nel book e attende che qualcuno lo colpisca.</p>
+                    <hr>
+                    <p class="small"><strong>Pro:</strong> Controllo totale sul prezzo.<br><strong>Contro:</strong> Se il mercato scappa via, l'ordine rimane inevaso.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="h-100 p-4 border rounded-4 bg-light">
+                    <h6 class="fw-bold text-success text-uppercase">Consiglio Operativo</h6>
+                    <p class="small">Per i Portafogli Pigri, usa sempre <strong>Ordini Limite</strong> posizionandoti vicino al prezzo Ask se hai fretta, o a metà spread se vuoi risparmiare.</p>
+                    <hr>
+                    <p class="small text-muted">Evita di negoziare nei primi e ultimi 15 minuti di apertura della borsa per evitare la volatilità eccessiva.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+    <div id="footer-placeholder"></div>
+    <script src="import.js?v1.0"></script>
+
+</body>
+</html>
