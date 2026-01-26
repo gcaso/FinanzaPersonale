@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portafogli Pigri - Analisi Integrata</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css?V1" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.5.2/css/all.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        body { background-color: #f0f2f5; font-family: 'Inter', sans-serif; color: #334155; line-height: 1.6; }
+        .main-header { background: #fff; padding: 40px 0; border-bottom: 1px solid #e2e8f0; margin-bottom: 40px; }
+        .portfolio-card { background: #ffffff; border: none; border-radius: 20px; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); margin-bottom: 40px; }
+        .accent-60-40 { border-left: 8px solid #3b82f6; }
+        .accent-all-weather { border-left: 8px solid #0dcaf0; }
+        .accent-golden { border-left: 8px solid #198754; }
+        .desc-column { padding: 40px; border-right: 1px solid #f1f5f9; }
+        .data-column { padding: 40px; background-color: #fafbfc; }
+        .chart-wrapper { position: relative; height: 200px; margin-bottom: 20px; }
+        .history-full-width { padding: 20px 40px 40px 40px; background-color: #fff; border-top: 1px solid #e2e8f0; position: relative; height: 500px; width: 100%; }
+        .metric-badge { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 10px; text-align: center; cursor: help; transition: transform 0.2s; }
+        .metric-badge:hover { transform: translateY(-2px); border-color: #3b82f6; }
+        .allocation-list { list-style: none; padding: 0; margin: 10px 0 0 0; }
+        .allocation-item { display: flex; justify-content: space-between; font-size: 0.85rem; padding: 2px 0; }
+        .badge-dot { width: 10px; height: 10px; border-radius: 3px; display: inline-block; margin-right: 8px; }
+        @media (max-width: 991.98px) { .desc-column { border-right: none; border-bottom: 1px solid #f1f5f9; } .history-full-width { padding: 20px; height: 400px; } }
+    </style>
+</head>
+<body>
+
+<div id="navbar-placeholder"></div>
+
+<header class="main-header">
+    <div class="container text-center">
+        <h1 class="fw-bold"><i class="fa-solid fa-piggy-bank text-primary me-2"></i> Portafogli Pigri: Composizione e Logica</h1>
+        <div class="mt-4 mx-auto" style="max-width: 900px;">
+            <p class="lead text-muted">
+                Un portafoglio pigro (Lazy Portfolio) è una strategia di investimento basata su un piccolo numero di asset a basso costo e gestita con un minimo di manutenzione, ideale per investire in modo passivo. Rappresentano modi alternativi di gestire l'allocazione del quarto pilastro quindi investimenti a lungo termine.
+            </p>
+            <p class="small text-secondary">
+                Questi portafogli sono altamente diversificati utilizzando in proporzioni prefissate le asset class principali (obbligazioni, azioni, oro e materie prime). Una volta decise queste proporzioni, la gestione consiste nel ribilanciare quando necessario: alcune asset class crescono in maniera più rapida mentre altre perdono valore in quanto tendono a performare in maniera diversa in scenari diversi (si parla di asset decorrelati). E' proprio questo principio che viene applicato per cercare di diminuire la volatilità del portafoglio e massimizzare il rendimento. Ribilanciare significa vendere asset in forte guadagno e comprare quelli in calo per ristabilire le proporzioni iniziali e riallineare il portafoglio al profilo di rischio desiderato.
+            </p>
+        </div>
+    </div>
+</header>
+
+<div class="container mb-5" id="portfolio-container"></div>
+
+<div id="footer-placeholder"></div>
+<script src="import.js?v1.0"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3.0.1/dist/chartjs-plugin-annotation.min.js"></script>
+
+<script>
+    const SEMESTERS = [];
+    for (let year = 2004; year <= 2024; year++) {
+        SEMESTERS.push(`Gen ${year}`);
+        if (year < 2024) SEMESTERS.push(`Lug ${year}`);
+    }
+
+    const DATA = {
+        '60_40': {
+            name: 'Portafoglio 60/40', accent: 'accent-60-40', labels: ['Azioni', 'Bond'], values: [60, 40], colors: ['#3b82f6', '#94a3b8'],
+            metrics: { 'CAGR': '8.2%', 'Drawdown': '-32%', 'Sharpe': '0.65' },
+            desc: 'Il classico portafoglio bilanciato. Rappresenta un compromesso ideale tra la crescita offerta dalle Azioni e la stabilità/protezione fornita dalle Obbligazioni. È il punto di riferimento per gli investitori con un orizzonte temporale medio (7-15 anni) e una tolleranza al rischio moderata, cercando di massimizzare i guadagni pur mitigando i forti ribassi di mercato.',
+            history: [10000, 10300, 10600, 11200, 11900, 12300, 12700, 10500, 8400, 9800, 11200, 11900, 12600, 13000, 13400, 14100, 14800, 16000, 17200, 18500, 19800, 20200, 20700, 21500, 22400, 24100, 25800, 25300, 24800, 27100, 29500, 32000, 34500, 37000, 39500, 35500, 31500, 35000, 38500, 40700, 43000]
+        },
+        'ALL_WEATHER': {
+            name: 'All Weather (Ray Dalio)', accent: 'accent-all-weather', labels: ['Azioni', 'Bond Lungo', 'Bond Medio', 'Oro', 'Commodity'], values: [30, 40, 15, 7.5, 7.5], colors: ['#0dcaf0', '#059669', '#6366f1', '#ffc107', '#8b5cf6'],
+            metrics: { 'CAGR': '6.8%', 'Drawdown': '-14%', 'Sharpe': '0.92' },
+            desc: 'Ideato da Ray Dalio, mira a performare in qualsiasi condizione economica (crescita/recessione, inflazione/deflazione). La chiave è il bilanciamento del rischio tra i diversi asset e non solo del capitale. Contiene una forte allocazione in Obbligazioni a Lungo Termine e Materie Prime/Oro per garantire stabilità anche in scenari avversi come l\'inflazione o il rallentamento economico.',
+            history: [10000, 10400, 10800, 11200, 11600, 11950, 12300, 12100, 11900, 12400, 12900, 13550, 14200, 14950, 15700, 16050, 16400, 16700, 17000, 17850, 18700, 18550, 18400, 19100, 19800, 20550, 21300, 21550, 21800, 22600, 23400, 24600, 25800, 26600, 27400, 25450, 23500, 24150, 24800, 25850, 26900]
+        },
+        'GOLDEN_BUTTERFLY': {
+            name: 'Golden Butterfly', accent: 'accent-golden', labels: ['Totale Mercato', 'Small Cap Value', 'Bond Lungo', 'Bond Breve', 'Oro'], values: [20, 20, 20, 20, 20], colors: ['#198754', '#22c55e', '#ec4899', '#64748b', '#ffc107'],
+            metrics: { 'CAGR': '7.5%', 'Drawdown': '-11%', 'Sharpe': '1.05' },
+            desc: 'Questo portafoglio è ultra-difensivo e diviso equamente tra azioni (Totale Mercato + Small Cap Value), obbligazioni a lungo termine e Oro. È specificamente progettato per eccellere in periodi di recessione e minimizzare i ribassi (Drawdown). Accetta rendimenti moderati in scenari di forte crescita in cambio di una maggiore resilienza. È spesso considerato un\'ottima soluzione per la fase di decumulo o per investitori con bassa tolleranza alla volatilità.',
+            history: [10000, 10650, 11300, 12000, 12700, 12950, 13200, 12800, 12400, 13050, 13700, 14500, 15300, 16050, 16800, 17150, 17500, 18150, 18800, 19850, 20900, 21050, 21200, 22050, 22900, 23900, 24900, 24650, 24400, 26250, 28100, 29550, 31000, 31750, 32500, 31150, 29800, 31650, 33500, 35150, 36800]
+        }
+    };
+
+    function init() {
+        const container = document.getElementById('portfolio-container');
+        if(!container) return;
+
+        Object.keys(DATA).forEach(id => {
+            const p = DATA[id];
+            const cardHtml = `
+                <div class="portfolio-card ${p.accent} shadow-sm">
+                    <div class="row g-0">
+                        <div class="col-lg-7 desc-column">
+                            <h3 class="fw-bold mb-3">${p.name}</h3>
+                            <p class="mb-4 text-secondary">${p.desc}</p>
+                            <div class="row g-3">${Object.entries(p.metrics).map(([k, v]) => `<div class="col-4"><div class="metric-badge"><div>${k}</div><div class="fw-bold text-primary">${v}</div></div></div>`).join('')}</div>
+                        </div>
+                        <div class="col-lg-5 data-column">
+                            <div class="chart-wrapper"><canvas id="chart-${id}"></canvas></div>
+                            <div class="allocation-list mb-3">${p.labels.map((l, i) => `<li class="allocation-item"><span><span class="badge-dot" style="background:${p.colors[i]}"></span>${l}</span><span class="fw-bold">${p.values[i]}%</span></li>`).join('')}</div>
+                        </div>
+                    </div>
+                    <div class="history-full-width">
+                        <h6 class="small fw-bold text-uppercase text-muted mb-3 text-center">Confronto Crescita (Base €10k)</h6>
+                        <canvas id="hist-${id}"></canvas>
+                    </div>
+                </div>`;
+            container.insertAdjacentHTML('beforeend', cardHtml);
+
+            try {
+                new Chart(document.getElementById(`chart-${id}`), {
+                    type: 'doughnut',
+                    data: { labels: p.labels, datasets: [{ data: p.values, backgroundColor: p.colors, borderWidth: 0 }] },
+                    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, cutout: '75%' }
+                });
+
+                new Chart(document.getElementById(`hist-${id}`), {
+                    type: 'line',
+                    data: {
+                        labels: SEMESTERS,
+                        datasets: Object.keys(DATA).map(key => ({
+                            label: DATA[key].name, data: DATA[key].history, borderColor: DATA[key].colors[0],
+                            borderWidth: key === id ? 3 : 1, fill: key === id, backgroundColor: key === id ? DATA[key].colors[0] + '15' : 'transparent',
+                            tension: 0.3, pointRadius: 2
+                        }))
+                    },
+                    options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: false } } }
+                });
+            } catch (e) { console.error("Errore grafico:", e); }
+        });
+    }
+
+    window.onload = init;
+</script>
+</body>
+</html>
