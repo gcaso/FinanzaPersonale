@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Market Overview | Dashboard Finanziaria Live</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css?V1" rel="stylesheet">
+    <style>
+        /* STILE ISPIRATO A GOOGLE FINANCE */
+        :root {
+            --google-blue: #1a73e8;
+            --google-gray: #5f6368;
+            --border-color: #dadce0;
+            --bg-light: #ffffff;
+        }
+        
+        body { 
+            background-color: var(--bg-light); 
+            color: #202124; 
+            font-family: 'Roboto', Arial, sans-serif;
+            line-height: 1.5;
+        }
+
+        /* Header minimale */
+        .hero-section { 
+            background: white; 
+            padding: 30px 0; 
+            border-bottom: 1px solid var(--border-color); 
+            margin-bottom: 20px; 
+        }
+
+        h1.display-5 { 
+            font-size: 1.75rem; 
+            font-weight: 400; 
+            color: #202124;
+        }
+
+        .lead { font-size: 1rem; color: var(--google-gray); }
+
+        /* Indicatori Live discreti */
+        .live-indicator {
+            font-size: 0.75rem;
+            color: #137333;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+        .dot { 
+            height: 7px; width: 7px; 
+            background-color: #137333; 
+            border-radius: 50%; 
+            display: inline-block; 
+            margin-right: 5px; 
+        }
+
+        /* Sezioni e Titoli */
+        .section-title { 
+            font-size: 1.25rem;
+            font-weight: 500; 
+            color: #202124; 
+            margin: 40px 0 20px 0;
+            display: flex;
+            align-items: center;
+        }
+
+        /* Card in stile Google (Border invece di Shadow) */
+        .widget-card { 
+            background: white; 
+            border-radius: 8px; 
+            padding: 0; /* TradingView gestisce il suo padding interno */
+            border: 1px solid var(--border-color);
+            margin-bottom: 24px;
+            overflow: hidden;
+        }
+
+        /* Box Disclaimer */
+        .disclaimer-box {
+            background-color: #f8f9fa;
+            border: 1px solid var(--border-color);
+            padding: 16px;
+            font-size: 0.8rem;
+            color: var(--google-gray);
+            margin: 50px 0;
+            border-radius: 8px;
+        }
+
+        /* Footer */
+        footer { 
+            padding: 24px 0; 
+            border-top: 1px solid var(--border-color);
+            color: var(--google-gray); 
+            font-size: 0.75rem; 
+        }
+
+        /* Rimuoviamo l'animazione pulse per un look più statico e professionale */
+        .dot { animation: none; }
+    </style>
+</head>
+<body>
+
+<div id="navbar-placeholder"></div>
+
+<header class="hero-section text-center">
+    <div class="container">
+        <div class="live-indicator"><span class="dot"></span> FEED DATI ATTIVO</div>
+        <h1 class="display-5 fw-bold text-dark">Asset Overview</h1>
+        <p class="lead text-muted mx-auto" style="max-width: 700px;">
+            Monitoraggio delle principali classi di investimento mondiali: indici azionari, materie prime e asset digitali.
+        </p>
+    </div>
+</header>
+
+<div class="container">
+    
+    <section id="indices">
+        <h2 class="section-title">Indici di Borsa Mondiali</h2>
+        <div class="widget-card">
+            <div class="tradingview-widget-container">
+                <div class="tradingview-widget-container__widget"></div>
+                <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-market-overview.js" async>
+                {
+                  "colorTheme": "light",
+                  "dateRange": "12M",
+                  "showChart": true,
+                  "locale": "it",
+                  "width": "100%",
+                  "height": "600",
+                  "isTransparent": true,
+                  "showSymbolLogo": true,
+                  "tabs": [
+                    {
+                      "title": "Nord America",
+                      "symbols": [
+                        {"s": "FOREXCOM:SPX500", "d": "S&P 500"},
+                        {"s": "FOREXCOM:NSXUSD", "d": "Nasdaq 100"},
+                        {"s": "FOREXCOM:DJI", "d": "Dow Jones 30"},
+                        {"s": "CBOE:VIX", "d": "VIX Index (Volatilità)"}
+                      ]
+                    },
+                    {
+                      "title": "Europa",
+                      "symbols": [
+                        {"s": "INDEX:SX5E", "d": "Euro Stoxx 50"},
+                        {"s": "INDEX:FTSEMIB", "d": "FTSE MIB"},
+                        {"s": "XETR:DAX", "d": "DAX 40"},
+                        {"s": "EURONEXT:PX1", "d": "CAC 40"},
+                        {"s": "FTSE:UKX", "d": "FTSE 100"}
+                      ]
+                    },
+                    {
+                      "title": "Asia & Emergenti",
+                      "symbols": [
+                        {"s": "TSE:NI225", "d": "Nikkei 225"},
+                        {"s": "HSI:HSI", "d": "Hang Seng"},
+                        {"s": "SSE:000001", "d": "Shanghai Composite"},
+                        {"s": "BSE:SENSEX", "d": "SENSEX (India)"}
+                      ]
+                    }
+                  ]
+                }
+                </script>
+            </div>
+        </div>
+    </section>
+
+    <section id="commodities">
+        <h2 class="section-title">Commodities & Materie Prime</h2>
+        <div class="widget-card">
+            <div class="tradingview-widget-container">
+                <div class="tradingview-widget-container__widget"></div>
+                <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-market-overview.js" async>
+                {
+                  "colorTheme": "light",
+                  "dateRange": "12M",
+                  "showChart": true,
+                  "locale": "it",
+                  "width": "100%",
+                  "height": "500",
+                  "isTransparent": true,
+                  "showSymbolLogo": true,
+                  "tabs": [
+                    {
+                      "title": "Metalli & Energia",
+                      "symbols": [
+                        {"s": "TVC:GOLD", "d": "Oro Spot"},
+                        {"s": "TVC:SILVER", "d": "Argento"},
+                        {"s": "TVC:USOIL", "d": "Petrolio WTI"},
+                        {"s": "TVC:UKOIL", "d": "Petrolio Brent"},
+                        {"s": "NYMEX:NG1!", "d": "Gas Naturale"}
+                      ]
+                    },
+                    {
+                      "title": "Industriali & Agricoli",
+                      "symbols": [
+                        {"s": "TVC:COPPER", "d": "Rame"},
+                        {"s": "TVC:PLATINUM", "d": "Platino"},
+                        {"s": "CBOT:ZW1!", "d": "Grano"},
+                        {"s": "NYMEX:KT1!", "d": "Caffè"},
+                        {"s": "NYMEX:CC1!", "d": "Cacao"}
+                      ]
+                    }
+                  ]
+                }
+                </script>
+            </div>
+        </div>
+    </section>
+
+    <section id="crypto">
+        <h2 class="section-title">Asset Digitali</h2>
+        <div class="widget-card">
+            <div class="tradingview-widget-container">
+                <div class="tradingview-widget-container__widget"></div>
+                <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js" async>
+                {
+                  "symbols": [ [ "BITSTAMP:BTCUSD|ALL" ] ],
+                  "chartOnly": false,
+                  "width": "100%",
+                  "height": "450",
+                  "locale": "it",
+                  "colorTheme": "light",
+                  "autosize": true,
+                  "showVolume": false,
+                  "hideDateRanges": false,
+                  "scalePosition": "right",
+                  "scaleMode": "Normal",
+                  "fontFamily": "Inter, sans-serif",
+                  "fontSize": "10",
+                  "chartType": "area",
+                  "lineColor": "#f7931a",
+                  "topColor": "rgba(247, 147, 26, 0.15)",
+                  "bottomColor": "rgba(247, 147, 26, 0)",
+                  "gridLineColor": "rgba(42, 46, 57, 0.06)"
+                }
+                </script>
+            </div>
+        </div>
+    </section>
+
+    <div class="disclaimer-box">
+        <strong>Disclaimer & Note Legali:</strong><br>
+        Le informazioni contenute in questa pagina sono fornite esclusivamente a scopo informativo e non costituiscono sollecitazione al pubblico risparmio, consulenza finanziaria o raccomandazione d'investimento. I dati sono integrati tramite widget di terze parti (TradingView) e potrebbero subire ritardi rispetto alle quotazioni reali di borsa secondo le normative degli exchange di riferimento. L'utente si assume la piena responsabilità per l'utilizzo di tali dati. Non viene garantita l'accuratezza o la completezza delle informazioni visualizzate.
+    </div>
+
+</div>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="import.js?v1.0"></script>
+</body>
+</html>
