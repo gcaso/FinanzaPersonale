@@ -32,7 +32,7 @@
             color: #495057;
         }
 
-        /* Stili per le Card dei 4 Pilastri (colori tenui) */
+        /* Stili per le Card dei 4 contenitori (colori tenui) */
         .card {
             transition: transform 0.3s, box-shadow 0.3s;
             border: none;
@@ -44,13 +44,13 @@
             box-shadow: 0 10px 20px rgba(0,0,0,0.1);
         }
         
-        /* Colori e Icone per i Pilastri */
-        .pillar-header-1 { background-color: #e9ecef !important; color: #343a40 !important; border-bottom: 3px solid #adb5bd; font-weight: bold; }
-        .pillar-header-2 { background-color: #d4edda !important; color: #155724 !important; border-bottom: 3px solid #75b798; font-weight: bold; }
-        .pillar-header-3 { background-color: #fff3cd !important; color: #856404 !important; border-bottom: 3px solid #ffda6a; font-weight: bold; }
-        .pillar-header-4 { background-color: #f8d7da !important; color: #721c24 !important; border-bottom: 3px solid #f5c2c7; font-weight: bold; }
+        /* Colori e Icone per i contenitori */
+        .contenitore-header-1 { background-color: #e9ecef !important; color: #343a40 !important; border-bottom: 3px solid #adb5bd; font-weight: bold; }
+        .contenitore-header-2 { background-color: #d4edda !important; color: #155724 !important; border-bottom: 3px solid #75b798; font-weight: bold; }
+        .contenitore-header-3 { background-color: #fff3cd !important; color: #856404 !important; border-bottom: 3px solid #ffda6a; font-weight: bold; }
+        .contenitore-header-4 { background-color: #f8d7da !important; color: #721c24 !important; border-bottom: 3px solid #f5c2c7; font-weight: bold; }
 
-        .pillar-icon {
+        .contenitore-icon {
             font-size: 1.8rem; 
             margin-right: 0.5rem;
         }
@@ -160,7 +160,7 @@
             </div>
             <div class="col-md-4">
                 <div class="alert alert-primary shadow-sm h-100 scroll-reveal" role="alert">
-                    <i class="fa-solid fa-scale-unbalanced-flip"></i> Le dimensioni dei vari pilastri non è fissa ma cambia al mutare della propria situazione, delle esigenze e priorità.
+                    <i class="fa-solid fa-scale-unbalanced-flip"></i> Le dimensioni dei vari contenitori non è fissa ma cambia al mutare della propria situazione, delle esigenze e priorità.
                 </div>
             </div>
             <div class="col-md-4">
@@ -174,13 +174,13 @@
             
             <div class="col-12">
                 <div class="card shadow-lg h-100 scroll-reveal">
-                    <div class="card-header pillar-header-1 py-3">
-                        <i class="fa-solid fa-wallet pillar-icon"></i> 1. Spese Correnti
+                    <div class="card-header contenitore-header-1 py-3">
+                        <i class="fa-solid fa-wallet contenitore-icon"></i> 1. Spese Correnti
                     </div>
                     <div class="card-body">
                         <h5 class="card-title text-uppercase small text-secondary">Il Quotidiano</h5>
                         <p class="card-text small"><strong class="section-title">Scopo:</strong> riguarda la gestione di entrate ed uscite. Vengono gestite le spese ricorrenti e di tutti i giorni come affitto, bollette, spesa alimentare, trasporti, ecc.</p>
-                        <p class="card-text small"><strong class="section-title">Allocazione:</strong> al fine di non intaccare i pilastri successivi e fare fronte anche a piccoli incidenti (piccole riparazioni, furto cellulare, rottura e sostituzione occhiali ecc..) occorrerebbe tenere a disposizione circa tre mesi di spese correnti.</p>
+                        <p class="card-text small"><strong class="section-title">Allocazione:</strong> al fine di non intaccare i contenitori successivi e fare fronte anche a piccoli incidenti (piccole riparazioni, furto cellulare, rottura e sostituzione occhiali ecc..) occorrerebbe tenere a disposizione circa tre mesi di spese correnti.</p>
                         <p class="card-text small"><strong class="section-title">Obiettivo:</strong> ottimizzazione e monitoraggio di entrate ed uscite (Budgeting). Imparare a stabilire regole di allocazione delle risorse tra spese fisse, spese accessorie e risparmi (es. regola del 50-30-20). Questo denaro deve essere immediatamente accessibile e non deve essere soggetto a rischio.</p>
                         <p class="card-text small border-top pt-2"><strong class="section-title text-success">Strumento ideale:</strong> conto corrente. E' importante che i costi di gestione siano molto bassi o assenti. Spesso questo è vincolato all'accredito di uno stipendio. La maggior parte dei conti correnti sono a costo 0, alcuni danno interessi sulla giacenza e/o cashback. Se si sceglie questo strumento sarebbe preferibile rimanere sotto la soglia di 5.000 euro di giacenza media per evitare l'imposta di bollo di 34,30 euro</p>
                     </div>
@@ -189,8 +189,8 @@
 
             <div class="col-12">
                 <div class="card shadow-lg h-100 scroll-reveal">
-                    <div class="card-header pillar-header-2 py-3">
-                        <i class="fa-solid fa-umbrella pillar-icon"></i> 2. Fondo di Emergenza
+                    <div class="card-header contenitore-header-2 py-3">
+                        <i class="fa-solid fa-umbrella contenitore-icon"></i> 2. Fondo di Emergenza
                     </div>
                     <div class="card-body">
                         <h5 class="card-title text-uppercase small text-secondary">La Riserva Anti-Shock</h5>
@@ -204,8 +204,8 @@
 
             <div class="col-12">
                 <div class="card shadow-lg h-100 scroll-reveal">
-                    <div class="card-header pillar-header-3 py-3">
-                        <i class="fa-solid fa-calendar-days pillar-icon"></i> 3. Spese Prevedibili
+                    <div class="card-header contenitore-header-3 py-3">
+                        <i class="fa-solid fa-calendar-days contenitore-icon"></i> 3. Spese Prevedibili
                     </div>
                     <div class="card-body">
                         <h5 class="card-title text-uppercase small text-secondary">Fondo strategico per spese prevedibili</h5>
@@ -219,13 +219,13 @@
 
             <div class="col-12">
                 <div class="card shadow-lg h-100 scroll-reveal">
-                    <div class="card-header pillar-header-4 py-3">
-                        <i class="fa-solid fa-rocket pillar-icon"></i> 4. Investimenti
+                    <div class="card-header contenitore-header-4 py-3">
+                        <i class="fa-solid fa-rocket contenitore-icon"></i> 4. Investimenti
                     </div>
                     <div class="card-body">
                         <h5 class="card-title text-uppercase small text-secondary">Il risparmio è la benzina, le azioni sono il motore.</h5>
                         <p class="card-text small"><strong class="section-title">Scopo:</strong> ATTENZIONE: per investimenti intendiamo strumenti diversificati, regolamentati, a gestione passiva, con bassi costi ed orizzonti temporali molto lunghi. Lo scopo è entrare nel mercato e partecipare alla sua crescita nel lungo periodo. Occorre inoltre bilanciare azioni ed obbligazioni tenendo in considerazione la propria propensione al rischio.</p>
-                        <p class="card-text small"><strong class="section-title">Allocazione:</strong> Una volta che i pilastri 1, 2 e 3 sono coperti, si può valutare di accettare un rischio maggiore per massimizzare la crescita, combattendo l'inflazione e sfruttando l'interesse composto.</p>
+                        <p class="card-text small"><strong class="section-title">Allocazione:</strong> Una volta che i contenitori 1, 2 e 3 sono coperti, si può valutare di accettare un rischio maggiore per massimizzare la crescita, combattendo l'inflazione e sfruttando l'interesse composto.</p>
                         <p class="card-text small"><strong class="section-title">Orizzonte temporale:</strong> Capitale destinato al lungo termine. Non investire denaro se pensi di poterne avere bisogno prima di 10 anni. Storicamente (i risultati passati non sono garanzia di risultati futuri) oltre 10 anni le possibilità di uscire dall'investimento in perdita sono molto basse, oltre i 20 anni non è mai successo. </p>
                         <p class="card-text small border-top pt-2"><strong class="section-title text-success">Strumento ideale:</strong>  ETF/Fondi Azionari che copiano passivamente indici di borsa.</p>
 			            <br>
