@@ -105,7 +105,6 @@
         document.getElementById('modalTitle').innerText = metric;
         document.getElementById('modalContent').innerHTML = METRIC_INFO[metric] || '';
         const modalEl = document.getElementById('metricModal');
-        // Ottimizzazione: usa getOrCreateInstance per evitare memory leak
         const myModal = bootstrap.Modal.getOrCreateInstance(modalEl);
         myModal.show();
     }
@@ -113,6 +112,9 @@
     function init() {
         const container = document.getElementById('portfolio-container');
         if(!container) return;
+
+        // Rileva se lo schermo è piccolo all'avvio
+        const showLabels = window.innerWidth >= 768;
 
         Object.keys(DATA).forEach(id => {
             const p = DATA[id];
@@ -151,7 +153,6 @@
                     options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, cutout: '75%' }
                 });
 
-                // Ottimizzazione Dataset: riordino le chiavi per essere sicuro che l'id corrente venga disegnato per ultimo (sopra gli altri)
                 const orderedKeys = Object.keys(DATA).filter(k => k !== id).concat([id]);
 
                 const chartDatasets = orderedKeys.map(key => ({
@@ -162,7 +163,7 @@
                     fill: key === id, 
                     backgroundColor: key === id ? DATA[key].colors[0] + '15' : 'transparent',
                     tension: 0.3, 
-                    pointRadius: key === id ? 2 : 0 // Disattiva i pallini per le linee di background (migliora le performance)
+                    pointRadius: key === id ? 2 : 0 
                 }));
 
                 new Chart(document.getElementById(`hist-${id}`), {
@@ -178,10 +179,10 @@
                         plugins: {
                             annotation: {
                                 annotations: {
-                                    subprime: { type: 'box', xMin: 'Lug 2007', xMax: 'Lug 2009', backgroundColor: 'rgba(255, 99, 132, 0.1)', borderWidth: 0, label: { display: true, content: 'Crisi mutui subprime', position: 'center', font: { size: 10 } } },
-                                    sovereign: { type: 'box', xMin: 'Lug 2011', xMax: 'Gen 2012', backgroundColor: 'rgba(255, 99, 132, 0.1)', borderWidth: 0, label: { display: true, content: 'Crisi Debito Sovrano', position: 'center', font: { size: 10 } } },
-                                    covid: { type: 'box', xMin: 'Gen 2020', xMax: 'Lug 2020', backgroundColor: 'rgba(255, 99, 132, 0.1)', borderWidth: 0, label: { display: true, content: 'COVID-19', position: 'center', font: { size: 10 } } },
-                                    ukraine: { type: 'box', xMin: 'Gen 2022', xMax: 'Gen 2023', backgroundColor: 'rgba(255, 99, 132, 0.1)', borderWidth: 0, label: { display: true, content: 'Guerra Russia Ucraina', position: 'center', font: { size: 10 } } }
+                                    subprime: { type: 'box', xMin: 'Lug 2007', xMax: 'Lug 2009', backgroundColor: 'rgba(255, 99, 132, 0.1)', borderWidth: 0, label: { display: showLabels, content: 'Crisi mutui subprime', position: 'center', font: { size: 10 } } },
+                                    sovereign: { type: 'box', xMin: 'Lug 2011', xMax: 'Gen 2012', backgroundColor: 'rgba(255, 99, 132, 0.1)', borderWidth: 0, label: { display: showLabels, content: 'Crisi Debito Sovrano', position: 'center', font: { size: 10 } } },
+                                    covid: { type: 'box', xMin: 'Gen 2020', xMax: 'Lug 2020', backgroundColor: 'rgba(255, 99, 132, 0.1)', borderWidth: 0, label: { display: showLabels, content: 'COVID-19', position: 'center', font: { size: 10 } } },
+                                    ukraine: { type: 'box', xMin: 'Gen 2022', xMax: 'Gen 2023', backgroundColor: 'rgba(255, 99, 132, 0.1)', borderWidth: 0, label: { display: showLabels, content: 'Guerra Russia Ucraina', position: 'center', font: { size: 10 } } }
                                 }
                             }
                         }
