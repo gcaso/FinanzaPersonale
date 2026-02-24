@@ -48,6 +48,18 @@
 
 <div class="container mb-5" id="portfolio-container"></div>
 
+<div class="modal fade" id="metricModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content border-0 shadow" style="border-radius: 20px;">
+      <div class="modal-header border-0 pb-0">
+        <h5 class="modal-title fw-bold text-primary" id="modalTitle"></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body py-4" id="modalContent"></div>
+    </div>
+  </div>
+</div>
+
 <div id="footer-placeholder"></div>
 <script src="import.js?v1.0"></script>
 
@@ -61,6 +73,12 @@
         SEMESTERS.push(`Gen ${year}`);
         if (year < 2024) SEMESTERS.push(`Lug ${year}`);
     }
+
+    const METRIC_INFO = {
+        'CAGR': 'Il <b>Compound Annual Growth Rate</b> è il tasso di crescita annuale composto. Rappresenta il rendimento medio annuo dell\'investimento nel tempo, ipotizzando che i profitti siano reinvestiti alla fine di ogni anno.',
+        'Drawdown': 'Indica la perdita massima registrata dal portafoglio (da un picco relativo al punto più basso) prima del raggiungimento di un nuovo picco. È una misura chiave del rischio storico.',
+        'Sharpe': 'L\'<b>Indice di Sharpe</b> misura il rendimento in eccesso ottenuto per ogni unità di rischio (volatilità) assunta. Più alto è il valore, più il portafoglio è stato efficiente nel rapporto rischio/rendimento.'
+    };
 
     const DATA = {
         '60_40': {
@@ -83,6 +101,15 @@
         }
     };
 
+    function showMetricModal(metric) {
+        document.getElementById('modalTitle').innerText = metric;
+        document.getElementById('modalContent').innerHTML = METRIC_INFO[metric] || '';
+        const modalEl = document.getElementById('metricModal');
+        // Ottimizzazione: usa getOrCreateInstance per evitare memory leak
+        const myModal = bootstrap.Modal.getOrCreateInstance(modalEl);
+        myModal.show();
+    }
+
     function init() {
         const container = document.getElementById('portfolio-container');
         if(!container) return;
@@ -95,7 +122,15 @@
                         <div class="col-lg-7 desc-column">
                             <h3 class="fw-bold mb-3">${p.name}</h3>
                             <p class="mb-4 text-secondary">${p.desc}</p>
-                            <div class="row g-3">${Object.entries(p.metrics).map(([k, v]) => `<div class="col-4"><div class="metric-badge"><div>${k}</div><div class="fw-bold text-primary">${v}</div></div></div>`).join('')}</div>
+                            <div class="row g-3">
+                                ${Object.entries(p.metrics).map(([k, v]) => `
+                                    <div class="col-4">
+                                        <div class="metric-badge" onclick="showMetricModal('${k}')">
+                                            <div>${k}</div>
+                                            <div class="fw-bold text-primary">${v}</div>
+                                        </div>
+                                    </div>`).join('')}
+                            </div>
                         </div>
                         <div class="col-lg-5 data-column">
                             <div class="chart-wrapper"><canvas id="chart-${id}"></canvas></div>
@@ -116,17 +151,41 @@
                     options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, cutout: '75%' }
                 });
 
+                // Ottimizzazione Dataset: riordino le chiavi per essere sicuro che l'id corrente venga disegnato per ultimo (sopra gli altri)
+                const orderedKeys = Object.keys(DATA).filter(k => k !== id).concat([id]);
+
+                const chartDatasets = orderedKeys.map(key => ({
+                    label: DATA[key].name, 
+                    data: DATA[key].history, 
+                    borderColor: DATA[key].colors[0],
+                    borderWidth: key === id ? 3 : 1, 
+                    fill: key === id, 
+                    backgroundColor: key === id ? DATA[key].colors[0] + '15' : 'transparent',
+                    tension: 0.3, 
+                    pointRadius: key === id ? 2 : 0 // Disattiva i pallini per le linee di background (migliora le performance)
+                }));
+
                 new Chart(document.getElementById(`hist-${id}`), {
                     type: 'line',
                     data: {
                         labels: SEMESTERS,
-                        datasets: Object.keys(DATA).map(key => ({
-                            label: DATA[key].name, data: DATA[key].history, borderColor: DATA[key].colors[0],
-                            borderWidth: key === id ? 3 : 1, fill: key === id, backgroundColor: key === id ? DATA[key].colors[0] + '15' : 'transparent',
-                            tension: 0.3, pointRadius: 2
-                        }))
+                        datasets: chartDatasets
                     },
-                    options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: false } } }
+                    options: { 
+                        responsive: true, 
+                        maintainAspectRatio: false, 
+                        scales: { y: { beginAtZero: false } },
+                        plugins: {
+                            annotation: {
+                                annotations: {
+                                    subprime: { type: 'box', xMin: 'Lug 2007', xMax: 'Lug 2009', backgroundColor: 'rgba(255, 99, 132, 0.1)', borderWidth: 0, label: { display: true, content: 'Crisi mutui subprime', position: 'center', font: { size: 10 } } },
+                                    sovereign: { type: 'box', xMin: 'Lug 2011', xMax: 'Gen 2012', backgroundColor: 'rgba(255, 99, 132, 0.1)', borderWidth: 0, label: { display: true, content: 'Crisi Debito Sovrano', position: 'center', font: { size: 10 } } },
+                                    covid: { type: 'box', xMin: 'Gen 2020', xMax: 'Lug 2020', backgroundColor: 'rgba(255, 99, 132, 0.1)', borderWidth: 0, label: { display: true, content: 'COVID-19', position: 'center', font: { size: 10 } } },
+                                    ukraine: { type: 'box', xMin: 'Gen 2022', xMax: 'Gen 2023', backgroundColor: 'rgba(255, 99, 132, 0.1)', borderWidth: 0, label: { display: true, content: 'Guerra Russia Ucraina', position: 'center', font: { size: 10 } } }
+                                }
+                            }
+                        }
+                    }
                 });
             } catch (e) { console.error("Errore grafico:", e); }
         });
